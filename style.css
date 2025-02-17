@@ -4,70 +4,81 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* 
+   1) Let the user scroll if content is taller than screen. 
+   2) If you prefer no scrolling for small screens, set 'overflow: hidden;'
+   but then content might get cut off. 
+*/
 html, body {
   width: 100%;
   height: 100%;
   font-family: 'Poppins', 'Montserrat', sans-serif;
-  overflow: hidden;  /* Prevent scrolling to ensure full-screen view */
+  overflow: auto; 
 }
 
-/* FULL SCREEN SCREENS */
+/* SCREENS - Use min-height so if content is bigger, we can scroll. */
 .screen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh; 
   display: none;
   justify-content: center;
   align-items: center;
   text-align: center;
   animation: fadeIn 0.5s forwards;
 }
+/* We remove position: absolute so the screens can stack vertically 
+   and allow normal scrolling if needed. */
 .screen.active {
   display: flex;
+  flex-direction: column; /* If you want them stacked top-to-bottom */
 }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* WELCOME & QUIZ BACKGROUND (using background.png) */
-.bg-welcome, .bg-quiz {
+/* WELCOME & QUIZ BACKGROUND */
+.bg-welcome {
   background: url('assets/background.png') no-repeat center center fixed;
   background-size: cover;
-  border-radius: 8px;
+}
+.bg-quiz {
+  background: url('assets/background.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
-/* RESULT SCREEN: solid cream background */
+/* RESULT SCREEN: cream background */
 .bg-result {
   background: #FFF8ED;
 }
 
-/* SCREEN CONTENT: Bigger box in the middle */
+/* SCREEN CONTENT: bigger box in the middle */
 .screen-content {
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
+  /* optional: add margin-top or margin-bottom if you want more space 
+     e.g., margin-top: 20px; margin-bottom: 20px; */
 }
 
-/* WELCOME PAGE BOX: Increased spacing */
+/* WELCOME PAGE BOX - More spacing */
 .welcome-content {
   background-color: rgba(255,255,255,0.85);
-  padding: 40px;         /* Increased padding */
+  padding: 40px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 .welcome-content h1 {
-  font-size: 26px;       /* Bigger heading */
+  font-size: 26px; 
   margin-bottom: 20px;
 }
 .welcome-content p {
-  margin-bottom: 15px;   /* More spacing between paragraphs */
+  margin-bottom: 15px;
 }
 #start-btn {
-  font-size: 20px;       /* Bigger button text */
-  padding: 16px 30px;    /* Increased padding for larger button */
+  font-size: 20px;
+  padding: 16px 30px; 
 }
 
 /* QUIZ CONTAINER with slide-up animation */
@@ -79,7 +90,7 @@ html, body {
 }
 @keyframes slideUp {
   from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(0); opacity: 1; }
 }
 
 /* HEADINGS & TEXT */
@@ -87,11 +98,6 @@ html, body {
   font-size: 22px;
   color: #333333;
   margin-bottom: 20px;
-}
-.sub {
-  margin-top: 5px;
-  font-size: 16px;
-  color: #555555;
 }
 .answers-container {
   display: flex;
@@ -126,10 +132,11 @@ html, body {
   background-color: rgba(255,255,255,0.85);
   padding: 20px;
   border-radius: 8px;
-  height: 100%;
+  /* If you want to ensure it expands if content is bigger than the screen,
+     let the container grow: no forced height. */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Vote button pinned at bottom */
+  justify-content: space-between; 
 }
 .banner-img {
   width: 100%;
@@ -146,6 +153,18 @@ html, body {
   line-height: 1.4;
   color: #555555;
   margin-bottom: 20px;
+}
+
+/* CONFETTI (one-time) */
+#confetti-container {
+  position: fixed; /* so confetti falls over entire screen */
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  display: none;
 }
 
 /* SHARE ROW */
@@ -203,7 +222,7 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* ANSWER BUTTONS (Pill style), ensure multi-word wrapping */
+/* ANSWER BUTTONS (Pill style), multi-word wrapping */
 .answer-btn {
   background-color: #FFFFFF;
   color: #555555;

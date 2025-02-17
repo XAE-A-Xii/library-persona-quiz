@@ -223,10 +223,9 @@ shareEmail.addEventListener('click', () => {
   window.open(mailUrl, '_blank');
 });
 
-// CONFETTI - One-time
+// CONFETTI (one-time)
 function launchConfetti() {
   confettiContainer.style.display = 'block';
-
   for (let i = 0; i < 30; i++) {
     const confetti = document.createElement("div");
     confetti.innerText = "🎉";
@@ -234,7 +233,7 @@ function launchConfetti() {
     confetti.style.left = Math.random() * 100 + "%";
     confetti.style.top = "-10%";
     confetti.style.fontSize = "24px";
-    confetti.style.animation = `fall 3s linear ${Math.random()}s forwards`;
+    confetti.style.animation = `fall 3s linear ${Math.random()}s forwards`; 
     confettiContainer.appendChild(confetti);
   }
 }
