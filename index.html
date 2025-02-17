@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- viewport-fit=cover enables safe area support on iPhone -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Which Library Persona Are You?</title>
   <link rel="stylesheet" href="style.css" />
   <!-- Google Fonts: Poppins & Montserrat -->
@@ -11,20 +12,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- WELCOME SCREEN (full viewport, background.png) -->
-  <div id="welcome-screen" class="screen bg-welcome active">
+  <!-- WELCOME SCREEN -->
+  <section id="welcome-screen" class="screen bg-welcome active">
     <div class="screen-content welcome-content">
       <h1>Which Library Persona Are You?</h1>
       <p>Take this 30-second quiz to find out what kind of library student you are!</p>
       <p class="sub">⏳ Takes less than a minute!</p>
       <button id="start-btn" class="btn teal-btn pill-btn">Start</button>
     </div>
-  </div>
+  </section>
 
-  <!-- QUIZ SCREEN (full viewport, background.png) -->
-  <div id="quiz-screen" class="screen bg-quiz">
-    <div class="screen-content quiz-container slide-up">
+  <!-- QUIZ SCREEN -->
+  <section id="quiz-screen" class="screen bg-quiz">
+    <div class="screen-content quiz-container">
       <!-- Smooth progress bar -->
       <div class="progress-bar">
         <div id="progress-fill" class="progress-fill"></div>
@@ -34,20 +34,20 @@
       <button id="next-btn" class="btn teal-btn pill-btn hidden">Next</button>
       <p id="progress-text" class="progress"></p>
     </div>
-  </div>
+  </section>
 
-  <!-- RESULT SCREEN (full viewport, cream background) -->
-  <div id="result-screen" class="screen bg-result">
+  <!-- RESULT SCREEN -->
+  <section id="result-screen" class="screen bg-result">
     <div class="screen-content result-content">
-      <img src="assets/banner.jpg" alt="Yushu Banner" class="banner-img" />
+      <img src="assets/banner.jpeg" alt="Yushu Banner" class="banner-img" />
       <h2>Your Library Persona:</h2>
       <h3 id="result-persona" class="persona-heading"></h3>
       <p id="result-desc" class="result-desc"></p>
-      
-      <!-- Confetti container (for one-time confetti) -->
+
+      <!-- Confetti container (one-time) -->
       <div id="confetti-container"></div>
-      
-      <!-- Share icons row (X, WhatsApp, Telegram, Email) -->
+
+      <!-- 4 share icons (X, WhatsApp, Telegram, Email) -->
       <div class="share-row">
         <p>Share your result:</p>
         <img src="assets/icon-x.png" alt="X" class="share-icon" id="share-x" />
@@ -55,11 +55,11 @@
         <img src="assets/icon-telegram.png" alt="Telegram" class="share-icon" id="share-telegram" />
         <img src="assets/icon-email.png" alt="Email" class="share-icon" id="share-email" />
       </div>
-      
-      <!-- "Vote Yushu!" button pinned at the bottom, fullwidth -->
+
+      <!-- "Vote Yushu!" button -->
       <button id="vote-btn" class="btn orange-btn pill-btn vote-fullwidth">Vote Yushu!</button>
     </div>
-  </div>
+  </section>
 
   <script src="script.js"></script>
 </body>

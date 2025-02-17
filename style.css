@@ -4,65 +4,49 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* 
-   1) Let the user scroll if content is taller than screen. 
-   2) If you prefer no scrolling for small screens, set 'overflow: hidden;'
-   but then content might get cut off. 
-*/
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   font-family: 'Poppins', 'Montserrat', sans-serif;
-  overflow: auto; 
+  overflow-x: hidden;
+  /* iPhone safe area insets */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
-/* SCREENS - Use min-height so if content is bigger, we can scroll. */
+/* SCREENS: Use normal flow for scrolling and responsiveness */
 .screen {
-  width: 100%;
-  min-height: 100vh; 
   display: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 100%;
+  padding: 20px 0;
   animation: fadeIn 0.5s forwards;
 }
-/* We remove position: absolute so the screens can stack vertically 
-   and allow normal scrolling if needed. */
 .screen.active {
-  display: flex;
-  flex-direction: column; /* If you want them stacked top-to-bottom */
+  display: block;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* WELCOME & QUIZ BACKGROUND */
-.bg-welcome {
-  background: url('assets/background.png') no-repeat center center fixed;
-  background-size: cover;
-}
+/* BACKGROUND STYLES */
+.bg-welcome,
 .bg-quiz {
-  background: url('assets/background.png') no-repeat center center fixed;
+  background: url('assets/background.png') no-repeat center center;
   background-size: cover;
+  /* Remove fixed attachment for smoother mobile scrolling */
 }
-
-/* RESULT SCREEN: cream background */
 .bg-result {
   background: #FFF8ED;
 }
 
-/* SCREEN CONTENT: bigger box in the middle */
+/* CENTERED CONTENT CONTAINER */
 .screen-content {
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
-  /* optional: add margin-top or margin-bottom if you want more space 
-     e.g., margin-top: 20px; margin-bottom: 20px; */
+  text-align: center;
 }
 
-/* WELCOME PAGE BOX - More spacing */
+/* WELCOME CONTENT */
 .welcome-content {
   background-color: rgba(255,255,255,0.85);
   padding: 40px;
@@ -70,18 +54,18 @@ html, body {
   margin-bottom: 20px;
 }
 .welcome-content h1 {
-  font-size: 26px; 
-  margin-bottom: 20px;
-}
-.welcome-content p {
+  font-size: 22px;
   margin-bottom: 15px;
 }
+.welcome-content p {
+  margin-bottom: 10px;
+}
 #start-btn {
-  font-size: 20px;
-  padding: 16px 30px; 
+  font-size: 18px;
+  padding: 14px 25px;
 }
 
-/* QUIZ CONTAINER with slide-up animation */
+/* QUIZ CONTAINER */
 .quiz-container {
   background-color: rgba(255,255,255,0.85);
   border-radius: 8px;
@@ -90,24 +74,24 @@ html, body {
 }
 @keyframes slideUp {
   from { transform: translateY(100%); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 /* HEADINGS & TEXT */
 .heading {
-  font-size: 22px;
+  font-size: 20px;
   color: #333333;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .answers-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .progress {
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 14px;
   color: #8B5E34;
 }
 
@@ -117,7 +101,7 @@ html, body {
   height: 8px;
   background-color: #ccc;
   border-radius: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   overflow: hidden;
 }
 .progress-fill {
@@ -132,11 +116,9 @@ html, body {
   background-color: rgba(255,255,255,0.85);
   padding: 20px;
   border-radius: 8px;
-  /* If you want to ensure it expands if content is bigger than the screen,
-     let the container grow: no forced height. */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  gap: 20px;
 }
 .banner-img {
   width: 100%;
@@ -144,21 +126,21 @@ html, body {
   margin-bottom: 20px;
 }
 .persona-heading {
-  font-size: 24px;
+  font-size: 22px;
   color: #333333;
   margin-bottom: 10px;
 }
 .result-desc {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.4;
   color: #555555;
   margin-bottom: 20px;
 }
 
-/* CONFETTI (one-time) */
+/* CONFETTI */
 #confetti-container {
-  position: fixed; /* so confetti falls over entire screen */
-  top: 0; 
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -173,9 +155,10 @@ html, body {
   align-items: center;
   gap: 8px;
   margin-bottom: 20px;
+  justify-content: center;
 }
 .share-row p {
-  font-size: 16px;
+  font-size: 14px;
   color: #333333;
 }
 .share-icon {
@@ -214,15 +197,13 @@ html, body {
   background-color: #E64A19;
   transform: scale(1.05);
 }
-
-/* Fullwidth Vote Button */
 .vote-fullwidth {
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
 }
 
-/* ANSWER BUTTONS (Pill style), multi-word wrapping */
+/* ANSWER BUTTONS */
 .answer-btn {
   background-color: #FFFFFF;
   color: #555555;
@@ -242,7 +223,13 @@ html, body {
   transform: scale(1.03);
 }
 
-/* HIDDEN ELEMENTS */
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HIDDEN */
 .hidden {
   display: none;
 }
