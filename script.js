@@ -1,12 +1,11 @@
 /******************************************************
- * "Which Library Persona Are You?" Final Version
- * - Full-screen for each screen
- * - Bigger, spaced-out welcome content
- * - Clean hyphen spacing in quiz questions
- * - Smooth progress bar transitions
+ * "Which Library Persona Are You?" Final
+ * - Full-screen approach
+ * - Spaced-out hyphens, bigger welcome, bigger Start button
+ * - No single-word lines in answers
+ * - Smooth progress bar
  * - One-time confetti
- * - "Vote Yushu!" button pinned at bottom (full width)
- * - Share icons for X, WhatsApp, Telegram, Email
+ * - "Vote Yushu!" pinned bottom, 4 share icons (X, WhatsApp, Telegram, Email)
  ******************************************************/
 
 // SCREENS
@@ -36,7 +35,10 @@ const shareWhatsApp = document.getElementById('share-whatsapp');
 const shareTelegram = document.getElementById('share-telegram');
 const shareEmail = document.getElementById('share-email');
 
-// QUIZ DATA (with spaced hyphens)
+/* 
+  QUIZ DATA 
+  (Spacing out hyphens: e.g., "mates — revision" or "no faff — straight")
+*/
 const questions = [
   {
     question: "How do you enter the library?",
@@ -145,6 +147,7 @@ function loadQuestion() {
   questionText.innerText = q.question;
   progressText.innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
 
+  // Smooth progress fill
   let progressPercent = (currentQuestionIndex / questions.length) * 100;
   progressFill.style.width = progressPercent + "%";
 
@@ -159,7 +162,9 @@ function loadQuestion() {
 
 // SELECT ANSWER
 function selectAnswer(type) {
+  // optional phone vibration
   if (navigator.vibrate) navigator.vibrate(40);
+
   tally[type]++;
   nextBtn.classList.remove('hidden');
 }
@@ -180,6 +185,7 @@ function showResult() {
   quizScreen.classList.add('hidden');
   resultScreen.classList.add('active');
 
+  // final progress fill = 100% 
   progressFill.style.width = "100%";
 
   let highest = "Loud";
@@ -192,15 +198,16 @@ function showResult() {
   resultPersona.innerText = personaData[highest].persona;
   resultDesc.innerText = personaData[highest].desc;
 
+  // Confetti once
   launchConfetti();
 }
 
 // VOTE YUSHU
 voteBtn.addEventListener('click', () => {
-  window.open("https://engage.luu.org.uk/elections/vote-now", "_blank");
+  window.open("https://engage.luu.org.uk/election/V2CBV/leadluu-2025/position/2CX46/equality-liberation-officer", "_blank");
 });
 
-// SHARE ICONS
+// SHARE ICONS (X, WhatsApp, Telegram, Email)
 shareX.addEventListener('click', () => {
   let text = `I got ${resultPersona.innerText} in the library quiz! Check it out.`;
   let url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
@@ -213,7 +220,7 @@ shareWhatsApp.addEventListener('click', () => {
 });
 shareTelegram.addEventListener('click', () => {
   let text = `I got ${resultPersona.innerText} in the library quiz! Check it out.`;
-  let tUrl = `https://t.me/share/url?url=${encodeURIComponent("https://xae-a-xii.github.io/library-persona-quiz/")}&text=${encodeURIComponent(text)}`;
+  let tUrl = `https://t.me/share/url?url=${encodeURIComponent("http://your-quiz-link.com")}&text=${encodeURIComponent(text)}`;
   window.open(tUrl, '_blank');
 });
 shareEmail.addEventListener('click', () => {
@@ -226,6 +233,8 @@ shareEmail.addEventListener('click', () => {
 // CONFETTI (one-time)
 function launchConfetti() {
   confettiContainer.style.display = 'block';
+
+  // spawn ~30 confetti for a single shot
   for (let i = 0; i < 30; i++) {
     const confetti = document.createElement("div");
     confetti.innerText = "🎉";
