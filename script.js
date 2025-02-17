@@ -204,7 +204,7 @@ function showResult() {
 
 // VOTE YUSHU
 voteBtn.addEventListener('click', () => {
-  window.open("https://engage.luu.org.uk/election/V2CBV/leadluu-2025/position/2CX46/equality-liberation-officer", "_blank");
+  window.open("https://engage.luu.org.uk/elections/vote-now", "_blank");
 });
 
 // SHARE ICONS (X, WhatsApp, Telegram, Email)
@@ -220,7 +220,7 @@ shareWhatsApp.addEventListener('click', () => {
 });
 shareTelegram.addEventListener('click', () => {
   let text = `I got ${resultPersona.innerText} in the library quiz! Check it out.`;
-  let tUrl = `https://t.me/share/url?url=${encodeURIComponent("http://your-quiz-link.com")}&text=${encodeURIComponent(text)}`;
+  let tUrl = `https://t.me/share/url?url=${encodeURIComponent("https://xae-a-xii.github.io/library-persona-quiz/")}&text=${encodeURIComponent(text)}`;
   window.open(tUrl, '_blank');
 });
 shareEmail.addEventListener('click', () => {
